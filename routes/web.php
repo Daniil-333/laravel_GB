@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\IndexController as AdminIndexController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,17 +16,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/news', [NewsController::class, 'index'])->name('news');
+Route::get('/news/{id}', [NewsController::class, 'show'])->where('name', '[0-9]+')->name('news_single');
+/*->where('name', '[A-Za-z]+')*/
+
+Route::name('admin.')
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('/', [AdminIndexController::class, 'index'])->name('index');
+        Route::get('/test1', [AdminIndexController::class, 'test1'])->name('test1');
+        Route::get('/test2', [AdminIndexController::class, 'test2'])->name('test2');
 });
 
-Route::get('/news', function () {
-    return view('news');
-});
-Route::get('/news/{name}', function ($name) {
-    return view('news_single', ['name' => $name]);
-})->where('name', '[A-Za-z]+');
 
-Route::get('/admin', function () {
-    return view('admin');
+
+Route::redirect('redirect', '/', 301);
+
+Route::fallback(function () {
+    return view('404');
 });

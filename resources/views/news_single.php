@@ -1,7 +1,7 @@
 <div>
     <h1>Одна новость</h1>
-    <h2><?=$name?></h2>
+    <h2><?=$item['title']?></h2>
 
-    <div>Текст новости</div>
+    <div><?=$item['description']?></div>
 
 </div>

@@ -1,5 +1,5 @@
 <div>
-    <a href="/">Главная</a>
-    <a href="/news">Новости</a>
-    <a href="/admin">Админка</a>
+    <a href="<?=route('home')?>">Главная</a>
+    <a href="<?=route('news')?>">Новости</a>
+    <a href="<?=route('admin.index')?>">Админка</a>
 </div>
