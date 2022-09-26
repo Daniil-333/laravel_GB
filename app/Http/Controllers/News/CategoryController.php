@@ -20,32 +20,37 @@ class CategoryController extends Controller
 
     public function show(Category $category, News $news, $id): string
     {
-        $category = $category->getCategoryById($id);
 
-        if(is_null($category)) {
+        try {
+            $category = $category->getCategoryById($id);
+
+            $news = $news->getNewsCategoryById($id);
+
+            return view('news.category.single', [
+                'category' => $category,
+                'news' => $news
+            ]);
+        }catch (\Exception $e) {
             return view('404');
-        }
 
-        $news = $news->getNewsCategoryById($id);
-        return view('news.category.single', [
-            'category' => $category,
-            'news' => $news
-        ]);
+        }
     }
 
     public function showBySlug(Category $category, News $news, $slug): string
     {
-        $category = $category->getCategoryBySlug($slug);
 
-        if(is_null($category)) {
+        try {
+            $category = $category->getCategoryBySlug($slug);
+
+            $news = $news->getNewsCategoryById($category['id']);
+
+            return view('news.category.single', [
+                'category' => $category,
+                'news' => $news
+            ]);
+
+        }catch (\Exception $e) {
             return view('404');
         }
-
-        $news = $news->getNewsCategoryById($category['id']);
-
-        return view('news.category.single', [
-            'category' => $category,
-            'news' => $news
-        ]);
     }
 }

@@ -26,6 +26,6 @@ class IndexController extends Controller
 
     public function addNews()
     {
-        return view('admin.add_news');
+        return view('admin.news.create');
     }
 }

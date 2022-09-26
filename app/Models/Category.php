@@ -31,7 +31,6 @@ class Category
     public function getCategoryById($id): ?array
     {
         if (array_key_exists($id, $this->getCategories())) {
-
             return $this->categories[$id];
         }
         return null;
@@ -46,10 +45,5 @@ class Category
             }
         }
         return null;
-    }
-
-    public function getCategoryIdBySlug($slug)
-    {
-
     }
 }
