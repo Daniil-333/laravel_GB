@@ -34,13 +34,6 @@ Route::name('news.')
         Route::get('/{id}', [IndexController::class, 'show'])->where('id', '[0-9]+')->name('single');
     });
 
-//Route::name('category.')
-//    ->prefix('category')
-//    ->group(function () {
-//        Route::get('/', [CategoryController::class, 'index'])->name('index');
-//        Route::get('/{id}', [CategoryController::class, 'show'])->where('id', '[0-9]+')->name('single');
-//    });
-
 Route::name('admin.')
     ->prefix('admin')
     ->group(function () {
