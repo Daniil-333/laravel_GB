@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\News\CategoryController;
+use App\Http\Controllers\News\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +21,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/news', [NewsController::class, 'index'])->name('news');
-Route::get('/news/{id}', [NewsController::class, 'show'])->where('name', '[0-9]+')->name('news_single');
+Route::get('/auth', [AuthController::class, 'index'])->name('auth');
+
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+
+Route::name('news.')
+    ->prefix('news')
+    ->group(function () {
+        Route::get('/', [IndexController::class, 'index'])->name('index');
+        Route::get('/{id}', [IndexController::class, 'show'])->where('id', '[0-9]+')->name('single');
+    });
 /*->where('name', '[A-Za-z]+')*/
+
+Route::name('category.')
+    ->prefix('category')
+    ->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        Route::get('/{id}', [CategoryController::class, 'show'])->where('id', '[0-9]+')->name('single');
+    });
 
 Route::name('admin.')
     ->prefix('admin')
@@ -28,6 +46,7 @@ Route::name('admin.')
         Route::get('/', [AdminIndexController::class, 'index'])->name('index');
         Route::get('/test1', [AdminIndexController::class, 'test1'])->name('test1');
         Route::get('/test2', [AdminIndexController::class, 'test2'])->name('test2');
+        Route::get('/add_news', [AdminIndexController::class, 'addNews'])->name('add_news');
 });
 
 

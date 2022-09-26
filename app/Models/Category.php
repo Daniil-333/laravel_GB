@@ -6,30 +6,34 @@ namespace App\Models;
 
 class Category
 {
-    private static $categories = [
-        [
+    private $categories = [
+        1 => [
             'id' => 1,
             'title' => 'Спорт',
             'slug' => ''
         ],
-        [
+        2 => [
             'id' => 2,
             'title' => 'Политика',
+            'slug' => ''
+        ],
+        3 => [
+            'id' => 3,
+            'title' => 'Животные',
             'slug' => ''
         ]
     ];
 
-    public static function getCategories()
+    public function getCategories()
     {
-        return static::$categories;
+        return $this->categories;
     }
 
-    public static function getCategoryId($id): ?array
+    public function getCategoryById($id): ?array
     {
-        foreach (static::getCategories() as $category) {
-            if($category['id'] ==$id) {
-                return $category;
-            }
+        if (array_key_exists($id, $this->getCategories())) {
+
+            return $this->categories[$id];
         }
         return null;
     }
