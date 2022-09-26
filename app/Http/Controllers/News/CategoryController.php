@@ -12,6 +12,7 @@ class CategoryController extends Controller
     public function index(Category $category): string
     {
         $category = $category->getCategories();
+
         return view('news.category.index', [
             'category' => $category
         ]);
@@ -24,7 +25,24 @@ class CategoryController extends Controller
         if(is_null($category)) {
             return view('404');
         }
+
         $news = $news->getNewsCategoryById($id);
+        return view('news.category.single', [
+            'category' => $category,
+            'news' => $news
+        ]);
+    }
+
+    public function showBySlug(Category $category, News $news, $slug): string
+    {
+        $category = $category->getCategoryBySlug($slug);
+
+        if(is_null($category)) {
+            return view('404');
+        }
+
+        $news = $news->getNewsCategoryById($category['id']);
+
         return view('news.category.single', [
             'category' => $category,
             'news' => $news

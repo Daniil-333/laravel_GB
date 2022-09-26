@@ -28,17 +28,18 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::name('news.')
     ->prefix('news')
     ->group(function () {
-        Route::get('/', [IndexController::class, 'index'])->name('index');
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        Route::get('/category/{id}', [CategoryController::class, 'show'])->where('id', '[0-9]+')->name('category.single');
+        Route::get('/category/{slug}', [CategoryController::class, 'showBySlug'])->where('name', '[A-Za-z]+')->name('category.single');
         Route::get('/{id}', [IndexController::class, 'show'])->where('id', '[0-9]+')->name('single');
     });
-/*->where('name', '[A-Za-z]+')*/
 
-Route::name('category.')
-    ->prefix('category')
-    ->group(function () {
-        Route::get('/', [CategoryController::class, 'index'])->name('index');
-        Route::get('/{id}', [CategoryController::class, 'show'])->where('id', '[0-9]+')->name('single');
-    });
+//Route::name('category.')
+//    ->prefix('category')
+//    ->group(function () {
+//        Route::get('/', [CategoryController::class, 'index'])->name('index');
+//        Route::get('/{id}', [CategoryController::class, 'show'])->where('id', '[0-9]+')->name('single');
+//    });
 
 Route::name('admin.')
     ->prefix('admin')

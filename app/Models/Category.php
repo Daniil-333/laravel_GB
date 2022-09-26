@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Models;
 
 
@@ -10,17 +9,17 @@ class Category
         1 => [
             'id' => 1,
             'title' => 'Спорт',
-            'slug' => ''
+            'slug' => 'sport'
         ],
         2 => [
             'id' => 2,
             'title' => 'Политика',
-            'slug' => ''
+            'slug' => 'politika'
         ],
         3 => [
             'id' => 3,
             'title' => 'Животные',
-            'slug' => ''
+            'slug' => 'zivotnye'
         ]
     ];
 
@@ -36,5 +35,21 @@ class Category
             return $this->categories[$id];
         }
         return null;
+    }
+
+    public function getCategoryBySlug($slug): ?array
+    {
+        foreach ($this->getCategories() as $key => $category) {
+
+            if($category['slug'] === $slug) {
+                return $this->categories[$key];
+            }
+        }
+        return null;
+    }
+
+    public function getCategoryIdBySlug($slug)
+    {
+
     }
 }
