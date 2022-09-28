@@ -3,6 +3,8 @@
 namespace App\Models;
 
 
+use Illuminate\Support\Facades\Route;
+
 class Category
 {
     private $categories = [

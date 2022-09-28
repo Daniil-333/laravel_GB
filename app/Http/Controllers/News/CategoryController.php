@@ -9,48 +9,34 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index(Category $category): string
+    public function index(Category $category)
     {
         $category = $category->getCategories();
 
-        return view('news.category.index', [
+        return view('news.categories', [
             'category' => $category
         ]);
     }
 
-    public function show(Category $category, News $news, $id): string
+    public function showById(Category $category, News $news, int $id)
     {
 
-        try {
-            $category = $category->getCategoryById($id);
+        return view('news.category', [
+            'category' => $category->getCategoryById($id),
+            'news' => $news->getNewsCategoryById($id)
+        ]);
 
-            $news = $news->getNewsCategoryById($id);
-
-            return view('news.category.single', [
-                'category' => $category,
-                'news' => $news
-            ]);
-        }catch (\Exception $e) {
-            return view('404');
-
-        }
     }
 
-    public function showBySlug(Category $category, News $news, $slug): string
+    public function showBySlug(Category $category, News $news, $slug)
     {
+        $category = $category->getCategoryBySlug($slug);
 
-        try {
-            $category = $category->getCategoryBySlug($slug);
+        $news = $news->getNewsCategoryById($category['id'] ?? null);
 
-            $news = $news->getNewsCategoryById($category['id']);
-
-            return view('news.category.single', [
-                'category' => $category,
-                'news' => $news
-            ]);
-
-        }catch (\Exception $e) {
-            return view('404');
-        }
+        return view('news.category', [
+            'category' => $category,
+            'news' => $news
+        ]);
     }
 }

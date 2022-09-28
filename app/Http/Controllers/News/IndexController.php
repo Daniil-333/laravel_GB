@@ -9,24 +9,17 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function index(News $news): string
+    public function index(News $news)
     {
-        $news = $news->getNews();
         return view('news.index', [
-            'news' => $news
+            'news' => $news->getNews()
         ]);
     }
 
-    public function show(News $news, $id): string
+    public function show(News $news, $id)
     {
-        try {
-            $news = $news->getNewsById($id);
-
-            return view('news.single', [
-                'item' => $news
-            ]);
-        }catch (\Exception $e) {
-            return view('404');
-        }
+        return view('news.one', [
+            'item' => $news->getNewsById($id)
+        ]);
     }
 }

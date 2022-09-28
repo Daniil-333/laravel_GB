@@ -29,9 +29,9 @@ Route::name('news.')
     ->prefix('news')
     ->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index');
-        Route::get('/category/{id}', [CategoryController::class, 'show'])->where('id', '[0-9]+')->name('category.single');
+        Route::get('/one/{id}', [IndexController::class, 'show'])->where('id', '[0-9]+')->name('show');
+        Route::get('/category/{id}', [CategoryController::class, 'showById'])->where('id', '[0-9]+')->name('category.show');
         Route::get('/category/{slug}', [CategoryController::class, 'showBySlug'])->where('name', '[A-Za-z]+')->name('category.single');
-        Route::get('/{id}', [IndexController::class, 'show'])->where('id', '[0-9]+')->name('single');
     });
 
 Route::name('admin.')
@@ -45,8 +45,12 @@ Route::name('admin.')
 
 
 
-Route::redirect('redirect', '/', 301);
+//Route::redirect('redirect', '/', 301);
 
 Route::fallback(function () {
     return view('404');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
