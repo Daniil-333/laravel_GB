@@ -1,11 +1,7 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
 @section('title')
     @parent | Новости
-@endsection
-
-@section('menu')
-    @include('menu')
 @endsection
 
 @section('content')

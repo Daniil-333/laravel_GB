@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@section('title')Страница@show</title>
+{{--    <title>{{ config('app.name', 'Laravel') }}</title>--}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -30,7 +31,18 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <li class="nav-item">
+                            <a href="{{ route('home') }}" class="nav-link">Главная</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('news.index') }}" class="nav-link">Новости</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.index') }}" class="nav-link">Админка</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('about') }}" class="nav-link">О проекте</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

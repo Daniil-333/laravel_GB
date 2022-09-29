@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\News\CategoryController;
 use App\Http\Controllers\News\IndexController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,13 +37,13 @@ Route::name('news.')
 
 Route::name('admin.')
     ->prefix('admin')
+    ->namespace('Admin')
     ->group(function () {
         Route::get('/', [AdminIndexController::class, 'index'])->name('index');
         Route::get('/test1', [AdminIndexController::class, 'test1'])->name('test1');
         Route::get('/test2', [AdminIndexController::class, 'test2'])->name('test2');
         Route::get('/news/create', [AdminIndexController::class, 'addNews'])->name('news.create');
 });
-
 
 
 //Route::redirect('redirect', '/', 301);
