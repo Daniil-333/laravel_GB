@@ -4,6 +4,10 @@
     @parent | Новости
 @endsection
 
+@section('menu')
+    @include('menu')
+@endsection
+
 @section('content')
     <div>
         <h1>Новости</h1>

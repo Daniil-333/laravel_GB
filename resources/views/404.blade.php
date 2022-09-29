@@ -4,6 +4,10 @@
     @parent | 404
 @endsection
 
+@section('menu')
+    @include('menu')
+@endsection
+
 @section('content')
 
     <div class="page404">

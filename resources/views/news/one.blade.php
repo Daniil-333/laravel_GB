@@ -9,6 +9,10 @@
         @endif
 @endsection
 
+@section('menu')
+    @include('menu')
+@endsection
+
 @section('content')
 
     <div class="container">

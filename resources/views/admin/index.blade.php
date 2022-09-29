@@ -4,6 +4,10 @@
     @parent | Главная
 @endsection
 
+@section('menu')
+    @include('menu')
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">
