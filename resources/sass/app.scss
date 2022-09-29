@@ -4,11 +4,18 @@
 // Variables
 @import 'variables';
 
+@import "common/reset";
+
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-textarea {
-    resize: none;
+@import "part/header";
+@import "part/footer";
+
+.main {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
 }
 
 .newsList {

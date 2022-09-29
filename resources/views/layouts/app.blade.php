@@ -18,7 +18,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="main">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -87,6 +87,15 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="footer">
+           <div class="container">
+               <div class="footer__content d-flex justify-content-sm-between align-items-center">
+                   <p class="footer__rights">&copy; Все права защищены</p>
+                   <p class="footer__year">{{ date('Y') }}</p>
+               </div>
+           </div>
+        </footer>
     </div>
 </body>
 </html>
