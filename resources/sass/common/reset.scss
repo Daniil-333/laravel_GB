@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  text-size-adjust: none;
+  position: relative;
+
+/*  &.lock {
+    overflow: hidden;
+    position: fixed;
+  }
+
+  &._fixPadding {
+    @media screen and (min-width: $desktopMF) {
+      padding-right: 17px;
+      header.header {
+        padding-right: 17px;
+      }
+    }
+  }*/
+}
+
+body input,
+body textarea,
+:focus,
+:active,
+a:focus,
+a:active {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+nav,header,footer,aside {display: block}
+
+input,button,textarea {font-family: inherit;border: none}
+
+input[type="submit"],
+input[type="reset"],
+input[type="search"] {
+  white-space: normal;
+  -webkit-appearance: none;
+}
+
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer
+}
+
+input::-ms-clear {display: none}
+
+button {cursor: pointer; background: transparent}
+
+button::-moz-focus-inner {padding: 0;border: 0}
+
+a,a:visited {text-decoration: none}
+
+a:hover {text-decoration: none}
+
+ul li {list-style-type: none}
+
+img {vertical-align: top}
+
+h1,h2,h3,h4,h5,h6 {font-size: inherit;font-weight: 400}
+
+table, caption, colgroup, col, thead, tbody, tfoot, tr, th, td {
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-spacing: 0;
+  border-collapse: collapse;
+  vertical-align: top;
+  text-align: left;
+  caption-side: top;
+}
