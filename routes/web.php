@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\News\CategoryController;
@@ -42,7 +43,7 @@ Route::name('admin.')
         Route::get('/', [AdminIndexController::class, 'index'])->name('index');
         Route::get('/test1', [AdminIndexController::class, 'test1'])->name('test1');
         Route::get('/test2', [AdminIndexController::class, 'test2'])->name('test2');
-        Route::get('/news/create', [AdminIndexController::class, 'addNews'])->name('news.create');
+        Route::get('/news/create', [AdminNewsController::class, 'addNews'])->name('news.create');
 });
 
 

@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title')
+    @parent | Сброс пароля
+@endsection
+
+@section('menu')
+    @include('menu')
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

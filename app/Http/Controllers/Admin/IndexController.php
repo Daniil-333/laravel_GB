@@ -23,9 +23,4 @@ class IndexController extends Controller
 //        Route::is();
         return view('admin.test2');
     }
-
-    public function addNews()
-    {
-        return view('admin.news.create');
-    }
 }
