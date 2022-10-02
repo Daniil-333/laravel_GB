@@ -11,10 +11,8 @@ class CategoryController extends Controller
 {
     public function index(Category $category)
     {
-        $category = $category->getCategories();
-
         return view('news.categories', [
-            'category' => $category
+            'category' => $category->getCategories()
         ]);
     }
 

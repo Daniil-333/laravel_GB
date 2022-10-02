@@ -20,7 +20,6 @@
 
                     <div class="card-body">
                         <ul class="nav flex-column">
-
                             @forelse($category as $item)
                                 <li class="nav-item">
                                     <a href="{{ route('news.category.show', $item['slug']) }}" class="nav-link">{{ $item['title'] }}</a>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 class Category
 {
@@ -27,7 +28,14 @@ class Category
 
     public function getCategories()
     {
-        return $this->categories;
+        return json_decode(Storage::disk('local')->get('categories.json'), true);
+
+//        return $this->categories;
+    }
+
+    public function setCategories($categories)
+    {
+        Storage::disk('local')->put('categories.json', json_encode($categories, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
 
     public function getCategoryById($id): ?array

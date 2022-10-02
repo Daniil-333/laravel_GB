@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/save', [HomeController::class, 'save'])->name('save');
+
 Route::get('/auth', [AuthController::class, 'index'])->name('auth');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
@@ -41,9 +43,9 @@ Route::name('admin.')
     ->namespace('Admin')
     ->group(function () {
         Route::get('/', [AdminIndexController::class, 'index'])->name('index');
+        Route::match(['get', 'post'], '/news/create', [AdminNewsController::class, 'create'])->name('news.create');
         Route::get('/test1', [AdminIndexController::class, 'test1'])->name('test1');
-        Route::get('/test2', [AdminIndexController::class, 'test2'])->name('test2');
-        Route::get('/news/create', [AdminNewsController::class, 'addNews'])->name('news.create');
+        Route::match(['get', 'post'],'/test2', [AdminIndexController::class, 'test2'])->name('test2');
 });
 
 

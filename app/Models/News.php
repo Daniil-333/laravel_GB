@@ -1,8 +1,8 @@
 <?php
 
-
 namespace App\Models;
 
+use Illuminate\Support\Facades\Storage;
 
 class News
 {
@@ -57,9 +57,21 @@ class News
         ],
     ];
 
+    public static function all()
+    {
+        return json_decode(Storage::disk('local')->get('news.json'), true);
+    }
+
     public function getNews()
     {
-        return $this->news;
+        return json_decode(Storage::disk('local')->get('news.json'), true);
+
+//        return $this->news;
+    }
+
+    public function setNews($news)
+    {
+        Storage::disk('local')->put('news.json', json_encode($news, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
 
     public function getNewsById($id): ?array
