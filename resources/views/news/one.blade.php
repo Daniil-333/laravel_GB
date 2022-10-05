@@ -25,6 +25,9 @@
                             <div class="card-header">
                                 <h1>{{ $item['title'] }}</h1>
                             </div>
+                            <div>
+                                <img src="{{ $item['image'] ?? asset('storage/img/default.jpg') }}" alt="">
+                            </div>
                             <div class="card-body">
                                 {{ $item['description'] }}
                             </div>

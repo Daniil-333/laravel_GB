@@ -26,6 +26,7 @@ class IndexController extends Controller
     {
 
         if($request->isMethod('post')) {
+            $request->flash();
             if(!isset($request->all()['typeData'])) {
                 return redirect()->route('admin.test2');
             }else {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -15,19 +16,25 @@ class NewsController extends Controller
     {
         if($request->isMethod('post')) {
 
+            $arr = $request->except('_token');
             $newsArr = $news->getNews();
-            $idNews = count($newsArr) + 1;
+
+            if($request->file('image')) {
+                $path = Storage::putFile('public/img', $request->file('image'));
+                $url = Storage::url($path);
+            }
 
             $newsArr[] = [
-                'id' => $idNews,
-                'title' => $request->except('_token')['name'],
-                'description' => $request->except('_token')['desc'],
-                'slug' => Str::slug($request->except('_token')['name']),
-                'category_id' => (int)$request->except('_token')['category'],
-                'isPrivate' => array_key_exists('isPrivate', $request->except('_token')),
+                'title' => $arr['name'],
+                'description' => $arr['desc'],
+                'slug' => Str::slug($arr['name']),
+                'category_id' => (int)$arr['category'],
+                'isPrivate' => isset($arr['isPrivate']),
+                'image' => $url ?? null,
             ];
+            $newsArr[array_key_last($newsArr)]['id'] = array_key_last($newsArr);
             $news->setNews($newsArr);
-            return redirect()->route('news.show', $idNews);
+            return redirect()->route('news.show', array_key_last($newsArr));
 
 //            $request->flash();
 //            return redirect()->route('admin.news.create');

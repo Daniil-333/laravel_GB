@@ -14,7 +14,7 @@
         <div class="row">
             <h1 class="text-center mb-3">Страница добавления новости</h1>
             <div class="col-md-8">
-                <form action="{{ route('admin.news.create') }}" method="POST">
+                <form action="{{ route('admin.news.create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row mb-3">
@@ -46,6 +46,14 @@
 
                         <div class="col-md-6">
                             <textarea id="desc" class="form-control" name="desc">{{ old('desc') }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="picture" class="col-md-4 col-form-label text-md-end">{{ __('Изображение') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="picture" type="file" name="image">
                         </div>
                     </div>
 
