@@ -14,14 +14,14 @@
         <div class="row">
             <h1 class="text-center mb-3">Страница добавления новости</h1>
             <div class="col-md-8">
-                <form action="{{ route('admin.news.create') }}" method="POST" enctype="multipart/form-data">
+                <form action="@if(!$news->id){{ route('admin.news.store') }}@else{{ route('admin.news.update', $news) }}@endif" method="POST" enctype="multipart/form-data">
                     @csrf
-
+                    @if($news->id) @method('PUT') @endif
                     <div class="row mb-3">
                         <label for="nameNews" class="col-md-4 col-form-label text-md-end">{{ __('Название новости') }}</label>
 
                         <div class="col-md-6">
-                            <input id="nameNews" type="text" class="form-control"  name="name" value="{{ old('name') }}" autofocus>
+                            <input id="nameNews" type="text" class="form-control"  name="title" value="{{ old('title') ?? $news->title }}" autofocus>
                         </div>
                     </div>
 
@@ -29,10 +29,11 @@
                         <label for="categoryNews" class="col-md-4 col-form-label text-md-end">{{ __('Категория новости') }}</label>
 
                         <div class="col-md-6">
-                            <select name="category" id="categoryNews" class="form-select">
+                            <select name="category_id" id="categoryNews" class="form-select">
                                 @forelse($categories as $item)
-                                    <option value="{{ $item['id'] }}" {{ ($item['id'] == old('category')) ? 'selected' : ''}}>
-                                        {{ $item['title'] }}
+                                    <option value="{{ $item->id }}"
+                                            @if ($item->id == old('category_id') || $item->id == $news->category_id) selected @endif>
+                                        {{ $item->title }}
                                     </option>
                                 @empty
                                     <option value="0">Нет категорий</option>
@@ -45,7 +46,7 @@
                         <label for="desc" class="col-md-4 col-form-label text-md-end">{{ __('Описание') }}</label>
 
                         <div class="col-md-6">
-                            <textarea id="desc" class="form-control" name="desc">{{ old('desc') }}</textarea>
+                            <textarea id="desc" class="form-control" name="description">{{ old('description') ?? $news->description }}</textarea>
                         </div>
                     </div>
 
@@ -60,7 +61,8 @@
                     <div class="row mb-3">
                         <div class="col-md-6 offset-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="isPrivate" id="isPrvate" {{ old('isPrivate') ? 'checked' : '' }}>
+                                <input class="form-check-input" type="checkbox" name="isPrivate" id="isPrvate"
+                                    @if ($news->isPrivate == 1 || old('isPrivate')) checked @endif>
 
                                 <label class="form-check-label" for="isPrvate">
                                     {{ __('Новость приватная?') }}
@@ -72,7 +74,11 @@
                     <div class="row mb-0">
                         <div class="col-md-8 offset-md-4">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Добавить новость') }}
+                                @if($news->id)
+                                    {{ __('Изменить новость') }}
+                                @else
+                                    {{ __('Добавить новость') }}
+                                @endif
                             </button>
                         </div>
                     </div>

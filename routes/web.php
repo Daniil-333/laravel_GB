@@ -40,10 +40,14 @@ Route::name('news.')
 
 Route::name('admin.')
     ->prefix('admin')
-    ->namespace('Admin')
     ->group(function () {
-        Route::get('/', [AdminIndexController::class, 'index'])->name('index');
-        Route::match(['get', 'post'], '/news/create', [AdminNewsController::class, 'create'])->name('news.create');
+        Route::get('/', [AdminNewsController::class, 'index'])->name('index');
+        Route::resource('/news', AdminNewsController::class)->except('show');
+       /* Route::get('/news/create', [AdminNewsController::class, 'create'])->name('news.create');
+        Route::get('/news/{news}/edit', [AdminNewsController::class, 'edit'])->name('news.edit');
+        Route::post('/news', [AdminNewsController::class, 'store'])->name('news.store');
+        Route::put('/news/{news}', [AdminNewsController::class, 'update'])->name('news.update');
+        Route::delete('/news/{news}', [AdminNewsController::class, 'destroy'])->name('news.destroy');*/
         Route::get('/test1', [AdminIndexController::class, 'test1'])->name('test1');
         Route::match(['get', 'post'],'/test2', [AdminIndexController::class, 'test2'])->name('test2');
 });

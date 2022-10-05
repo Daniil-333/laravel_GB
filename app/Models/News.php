@@ -2,11 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-class News
+class News extends Model
 {
-    private $news = [
+    //protected $table = 'my_news';
+    //protected $primaryKey = 'news_id';
+    //public $timestamps = false;
+
+    protected $fillable = ['title', 'description', 'isPrivate', 'category_id'];
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+    /*private $news = [
       1 => [
           'id' => 1,
           'title' => 'Новость 1',
@@ -91,5 +101,5 @@ class News
             }
         }
         return $news;
-    }
+    }*/
 }

@@ -2,13 +2,21 @@
 
 namespace App\Models;
 
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
-class Category
+class Category extends Model
 {
-    private $categories = [
+    use HasFactory;
+
+    protected $fillable = ['title', 'slug'];
+
+    public function news() {
+        return $this->hasMany(News::class);
+    }
+    /*private $categories = [
         1 => [
             'id' => 1,
             'title' => 'Спорт',
@@ -55,5 +63,5 @@ class Category
             }
         }
         return null;
-    }
+    }*/
 }

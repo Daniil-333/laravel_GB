@@ -3,7 +3,7 @@
 @section('title')
     @parent |
         @if(isset($category))
-            {{ $category['title'] }}
+            {{ $category }}
         @else
             Категории
         @endif
@@ -23,7 +23,7 @@
                         <h1>
                             {{ __('Новости из категории') }}
                             @isset($category)
-                                {{ $category['title'] }}
+                                {{ $category }}
                             @endisset
                         </h1>
                     </div>

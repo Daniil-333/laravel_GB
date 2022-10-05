@@ -9,32 +9,39 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index(Category $category)
+    public function index()
     {
         return view('news.categories', [
-            'category' => $category->getCategories()
+            'category' => Category::all()
         ]);
     }
 
     public function showById(Category $category, News $news, int $id)
     {
 
+        $category = Category::find($id);
+
         return view('news.category', [
-            'category' => $category->getCategoryById($id),
-            'news' => $news->getNewsCategoryById($id)
+            'category' => $category->title,
+            'news' => $category->news
         ]);
 
     }
 
-    public function showBySlug(Category $category, News $news, $slug)
+    public function showBySlug($slug)
     {
-        $category = $category->getCategoryBySlug($slug);
+/*        $category = $category->getCategoryBySlug($slug);
 
-        $news = $news->getNewsCategoryById($category['id'] ?? null);
+        $news = $news->getNewsCategoryById($category['id'] ?? null);*/
+
+        $category = Category::query()->where('slug', $slug)->first();
+//        $news = $category->news;
+//        dd($news->keyBy('id'));
+//        $news = News::paginate(5);
 
         return view('news.category', [
-            'category' => $category,
-            'news' => $news
+            'category' => $category->title,
+            'news' => $category->news
         ]);
     }
 }

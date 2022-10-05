@@ -8,17 +8,25 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function index(News $news)
+    public function index()
     {
+        //$news = DB::select('SELECT * FROM `news` WHERE 1');
+        //$news = DB::table('news')->get(); //getAll
+
+
+        //$news = News::simplePaginate(5);
+        $news = News::paginate(5);
         return view('news.index', [
-            'news' => $news->getNews()
+            'news' => News::all()
         ]);
     }
 
-    public function show(News $news, $id)
+    public function show($id)
     {
+        //$news = DB::select('SELECT * FROM `news` WHERE id = :id', ['id' => $id]);
+        //$news = DB::table('news')->find($id); //getOne($id)
         return view('news.one', [
-            'item' => $news->getNewsById($id)
+            'item' => News::find($id)
         ]);
     }
 }
