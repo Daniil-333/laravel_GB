@@ -45,6 +45,9 @@
                             @endforelse
 
                         </ul>
+                        <div class="mt-3">
+                            {{ $news->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

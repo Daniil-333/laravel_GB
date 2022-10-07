@@ -13,7 +13,7 @@
         <div class="row">
             <h1>CRUD Новостей</h1>
             @forelse($news as $item)
-                <form action="{{ route('admin.news.destroy', $item) }}" method="post">
+                <form action="{{ route('admin.news.destroy', $item) }}" method="post" class="mb-3">
                     <h3>{{ $item->title }}</h3>
                     <a href="{{ route('admin.news.edit', $item) }}" class="btn btn-success">edit</a>
                     @csrf

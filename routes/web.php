@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\News\CategoryController;
@@ -48,6 +49,7 @@ Route::name('admin.')
         Route::post('/news', [AdminNewsController::class, 'store'])->name('news.store');
         Route::put('/news/{news}', [AdminNewsController::class, 'update'])->name('news.update');
         Route::delete('/news/{news}', [AdminNewsController::class, 'destroy'])->name('news.destroy');*/
+        Route::resource('/category', AdminCategoryController::class)->except('show');
         Route::get('/test1', [AdminIndexController::class, 'test1'])->name('test1');
         Route::match(['get', 'post'],'/test2', [AdminIndexController::class, 'test2'])->name('test2');
 });

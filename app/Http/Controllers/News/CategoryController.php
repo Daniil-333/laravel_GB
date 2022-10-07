@@ -31,17 +31,15 @@ class CategoryController extends Controller
     public function showBySlug($slug)
     {
 /*        $category = $category->getCategoryBySlug($slug);
-
         $news = $news->getNewsCategoryById($category['id'] ?? null);*/
 
         $category = Category::query()->where('slug', $slug)->first();
-//        $news = $category->news;
-//        dd($news->keyBy('id'));
-//        $news = News::paginate(5);
+        $news = News::query()->where('category_id', $category->id)->paginate(5);
 
         return view('news.category', [
             'category' => $category->title,
-            'news' => $category->news
+//            'news' => $category->news,
+            'news' => $news
         ]);
     }
 }
