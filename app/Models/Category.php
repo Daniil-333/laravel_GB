@@ -16,6 +16,17 @@ class Category extends Model
     public function news() {
         return $this->hasMany(News::class);
     }
+
+
+    public function attributeNames()
+    {
+        return [
+            'title' => 'Название новости',
+            'description' => 'Описание новости',
+            'category_id' => 'Категория новости',
+            'image' => 'Изображение',
+        ];
+    }
     /*private $categories = [
         1 => [
             'id' => 1,

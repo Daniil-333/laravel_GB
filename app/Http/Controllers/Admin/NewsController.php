@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewsRequest;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Database\Eloquent\Model;
@@ -29,16 +30,17 @@ class NewsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(NewsRequest $request, News $news)
     {
-        $request->flash();
+
+//        $request->validate($news->rules(), [], $news->attributeNames());
+        $request->validated();
 
         if($request->file('image')) {
             $path = Storage::putFile('public/img', $request->file('image'));
             $url = Storage::url($path);
         }
 
-        $news = new News();
         $news->image = $url ?? null;
         $news->fill($request->all())->save();
 
@@ -67,8 +69,9 @@ class NewsController extends Controller
                     return redirect()->route('news.show', array_key_last($newsArr));*/
     }
 
-    public function update(Request $request, News $news) {
-        $request->flash();
+    public function update(NewsRequest $request, News $news) {
+
+        $request->validated();
 
         if ($request->file('image')) {
             $path = Storage::putFile('public/img', $request->file('image'));

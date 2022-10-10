@@ -22,24 +22,30 @@
                 <form action="@if(!$category->id){{ route('admin.category.store') }}@else{{ route('admin.category.update', $category) }}@endif" method="POST">
                     @csrf
                     @if($category->id) @method('PUT') @endif
-                    <div class="row mb-3">
-                        <label for="nameCategory" class="col-md-4 col-form-label text-md-end">{{ __('Название категории') }}</label>
+                    <div class="form-group col-md-8 mb-4">
+                        <label for="nameCategory" class="mb-2">{{ __('Название категории') }}</label>
 
-                        <div class="col-md-6">
+                        @if ($errors->has('title'))
+                            <div class="alert alert-danger" role="alert">
+                                @foreach($errors->get('title') as $error)
+                                    {{ $error }}<br>
+                                @endforeach
+                            </div>
+                        @endif
+
+                        <div class="">
                             <input id="nameCategory" type="text" class="form-control"  name="title" value="{{ old('title') ?? $category->title }}" autofocus>
                         </div>
                     </div>
 
-                    <div class="row mb-0">
-                        <div class="col-md-8 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
-                                @if($category->id)
-                                    {{ __('Изменить категорию') }}
-                                @else
-                                    {{ __('Добавить категорию') }}
-                                @endif
-                            </button>
-                        </div>
+                    <div class="form-group col-md-8 mb-4">
+                        <button type="submit" class="btn btn-primary">
+                            @if($category->id)
+                                {{ __('Изменить категорию') }}
+                            @else
+                                {{ __('Добавить категорию') }}
+                            @endif
+                        </button>
                     </div>
                 </form>
             </div>

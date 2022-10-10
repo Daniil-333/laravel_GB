@@ -23,6 +23,11 @@
             @empty
                 <p>Нет новостей</p>
             @endforelse
+            <div>
+                <div class="mb-3 mt-3">
+                    <a href="{{ route('admin.news.create') }}" class="btn btn-dark">Добавить новость</a>
+                </div>
+            </div>
             <div class="mt-3">
                 {{ $news->links() }}
             </div>

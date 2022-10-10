@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -25,11 +26,10 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request, Category $category)
     {
-        $request->flash();
+        $request->validated();
 
-        $category = new Category();
         $category->fill([
             'title' => $request->all()['title'],
             'slug' => Str::slug($request->all()['title']),
