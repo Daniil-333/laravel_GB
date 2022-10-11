@@ -33,7 +33,6 @@ class NewsController extends Controller
     public function store(NewsRequest $request, News $news)
     {
 
-//        $request->validate($news->rules(), [], $news->attributeNames());
         $request->validated();
 
         if($request->file('image')) {
@@ -45,28 +44,6 @@ class NewsController extends Controller
         $news->fill($request->all())->save();
 
         return redirect()->route('news.show', $news->id);
-
-        /*            $data = [
-                        'title' => $request->title,
-                        'description' => $request->description,
-                        'isPrivate' => isset($request->isPrivate),
-                        'image' => $url ?? null,
-                        'category_id' => (int)$request->category,
-                    ];
-
-                    $id = DB::table('news')->insertGetId($data);
-                    return redirect()->route('news.show', $id);*/
-        /*            $newsArr[] = [
-                        'title' => $arr['name'],
-                        'description' => $arr['desc'],
-                        'slug' => Str::slug($arr['name']),
-                        'category_id' => (int)$arr['category'],
-                        'isPrivate' => isset($arr['isPrivate']),
-                        'image' => $url ?? null,
-                    ];
-                    $newsArr[array_key_last($newsArr)]['id'] = array_key_last($newsArr);
-                    $news->setNews($newsArr);
-                    return redirect()->route('news.show', array_key_last($newsArr));*/
     }
 
     public function update(NewsRequest $request, News $news) {

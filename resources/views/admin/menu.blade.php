@@ -8,6 +8,7 @@
     <a href="#" class="nav-link dropdown-toggle {{ request()->routeIs('admin.category.index') ? 'active' : '' }}" id="crudDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">CRUD</a>
     <ul class="dropdown-menu" aria-labelledby="crudDropdown">
         <li><a class="dropdown-item" href="{{ route('admin.category.index') }}">Категории</a></li>
+        <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">{{ __('Пользователи') }}</a></li>
     </ul>
 </li>
 <li class="nav-item">

@@ -27,7 +27,9 @@ class NewsRequest extends FormRequest
             'title' => 'required|min:5|max:20',
             'description' => 'required|min:5',
             'category_id' => "required|exists:App\Models\Category,id",
-            'image' => 'mimes:jpeg,bmp,png|max:1000'
+            'image' => 'mimes:jpeg,bmp,png|max:1000',
+//            'isPrivate' => 'boolean',
+            'isPrivate' => 'sometimes|in:1',
         ];
     }
 
@@ -39,7 +41,6 @@ class NewsRequest extends FormRequest
             'description.required' => 'Ты забыл заполнить :attribute',
             'description.min' => 'Мало буков в поле :attribute',
         ];
-
     }
 
     public function attributes()

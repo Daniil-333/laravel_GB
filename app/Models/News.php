@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
@@ -10,6 +11,8 @@ class News extends Model
     //protected $table = 'my_news';
     //protected $primaryKey = 'news_id';
     //public $timestamps = false;
+    use HasFactory;
+
 
     protected $fillable = ['title', 'description', 'isPrivate', 'category_id'];
 
@@ -17,26 +20,6 @@ class News extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function rules()
-    {
-//        $tableNameCatagory = (new Category())->getTable();
-        return [
-            'title' => 'required|min:5|max:20',
-            'description' => 'required|min:5',
-            'category_id' => "required|exists:App\Models\Category,id",
-            'image' => 'mimes:jpg,bmp,png|max:1000'
-        ];
-    }
-
-    public function attributeNames()
-    {
-        return [
-            'title' => 'Название новости',
-            'description' => 'Описание новости',
-            'category_id' => 'Категория новости',
-            'image' => 'Изображение',
-        ];
-    }
     /*private $news = [
       1 => [
           'id' => 1,

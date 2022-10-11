@@ -60,8 +60,12 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        dd($category->news());
-        $category->delete();
-        return redirect()->route('admin.category.index')->with('success', 'Категория удалена');
+        try {
+            $category->delete();
+            return redirect()->route('admin.category.index')->with('success', 'Категория удалена');
+        }catch (\Exception $e) {
+            return redirect()->route('admin.category.index')->with('success', 'Категория не может быть удалена, т.к. в ней присутствуют новости');
+        }
+
     }
 }

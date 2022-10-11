@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\News;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+         \App\Models\User::factory(5)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
@@ -22,6 +24,14 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(CategorySeeder::class);
-        $this->call(NewsSeeder::class);
+//        $this->call(NewsSeeder::class);
+        \App\Models\News::factory()->count(10)->create();
+        \App\Models\News::factory()->count(8)->create([
+            'category_id' => 2
+        ]);
+        \App\Models\News::factory()->count(6)->create([
+            'category_id' => 3
+        ]);
+        $this->call(AdminSeeder::class);
     }
 }
