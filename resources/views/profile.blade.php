@@ -79,19 +79,26 @@
                             </div>
 
                             <div class="form-group row mb-3">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Новый пароль</label>
+                                <label for="passwordNew" class="col-md-4 col-form-label text-md-right">Новый пароль</label>
 
                                 <div class="col-md-6">
-{{--                                    @if ($errors->has('newPassword'))
-                                        <div class="alert alert-danger" role="alert">
-                                            @foreach ($errors->get('newPassword') as $error)
-                                                {{ $error }}
-                                            @endforeach
-                                        </div>
-                                    @endif--}}
-                                    <input id="password-confirm" type="password" class="form-control @error('newPassword') is-invalid @enderror" name="newPassword" required autocomplete="new-password">
+                                    <input id="passwordNew" type="password" class="form-control @error('newPassword') is-invalid @enderror" name="newPassword" required autocomplete="new-password">
 
                                     @error('newPassword')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Подтвердите пароль</label>
+
+                                <div class="col-md-6">
+                                    <input id="password-confirm" type="password" class="form-control @error('newPassword_confirmation') is-invalid @enderror" name="newPassword_confirmation" required autocomplete="new-password">
+
+                                    @error('newPassword_confirmation')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

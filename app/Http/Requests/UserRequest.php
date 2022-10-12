@@ -27,8 +27,7 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|min:5|max:20',
             'email' => 'required|email|unique:users,email',
-            'password' => "required|min:8|max:20",
-            'password_repeat' => "required|min:8|max:20",
+            'password' => "required|min:8|max:20|confirmed",
             'isAdmin' => 'sometimes|in:on',
         ];
     }
@@ -43,9 +42,6 @@ class UserRequest extends FormRequest
             'password.required' => 'Ты забыл заполнить :attribute',
             'password.min' => 'Мало символов в поле :attribute',
             'password.max' => 'Много символов в поле :attribute',
-            'password_repeat.required' => 'Ты забыл заполнить :attribute',
-            'password_repeat.min' => 'Мало символов в поле :attribute',
-            'password_repeat.max' => 'Много символов в поле :attribute',
         ];
     }
 
@@ -55,7 +51,6 @@ class UserRequest extends FormRequest
             'name' => 'Имя пользователя',
             'email' => 'E-mail',
             'password' => 'Пароль',
-            'password_repeat' => 'Повторите пароль',
         ];
     }
 }

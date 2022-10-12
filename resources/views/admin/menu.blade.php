@@ -12,7 +12,7 @@
     </ul>
 </li>
 <li class="nav-item">
-    <a href="{{ route('admin.news.create') }}" class="nav-link {{ request()->routeIs('admin.news.create') ? 'active' : '' }}">Добавить новость</a>
+    <a href="{{ route('admin.parser') }}" class="nav-link {{ request()->routeIs('admin.news.create') ? 'active' : '' }}">Парсер</a>
 </li>
 <li class="nav-item">
     <a href="{{ route('admin.test1') }}" class="nav-link">Скачать избражение</a>

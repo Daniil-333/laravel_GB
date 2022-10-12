@@ -68,18 +68,18 @@
                             </div>
 
                             <div class="form-group col-md-8 mb-4">
-                                <label for="passwUserR" class="mb-2">{{ __('Повторите пароль') }}</label>
+                                <label for="passwUser-confirm" class="mb-2">{{ __('Подтвердите пароль') }}</label>
 
-                                @if ($errors->has('password_repeat'))
+                                @if ($errors->has('password_confirmation'))
                                     <div class="alert alert-danger" role="alert">
-                                        @foreach ($errors->get('password_repeat') as $error)
+                                        @foreach ($errors->get('password_confirmation') as $error)
                                             {{ $error }}<br>
                                         @endforeach
                                     </div>
                                 @endif
 
                                 <div class="">
-                                    <input id="passwUserR" type="password" class="form-control" name="password_repeat">
+                                    <input id="passwUser-confirm" type="password" class="form-control" name="password_confirmation">
                                 </div>
                             </div>
 

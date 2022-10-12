@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Storage;
 
 class News extends Model
 {
-    //protected $table = 'my_news';
+/*    //protected $table = 'my_news';
     //protected $primaryKey = 'news_id';
-    //public $timestamps = false;
+    //public $timestamps = false;*/
     use HasFactory;
 
 
-    protected $fillable = ['title', 'description', 'isPrivate', 'category_id'];
+    protected $fillable = ['title', 'description', 'isPrivate', 'image', 'created_at', 'updated_at', 'category_id'];
 
     public function category() {
         return $this->belongsTo(Category::class);

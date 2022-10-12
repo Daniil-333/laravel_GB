@@ -60,7 +60,7 @@
                                             @endforeach
                                         </div>
                                     @endif--}}
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="12345678" required autocomplete="new-password">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="12345678" required autocomplete="password">
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -71,13 +71,28 @@
                             </div>
 
                             <div class="form-group row mb-3">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Новый пароль</label>
+                                <label for="passwordNew" class="col-md-4 col-form-label text-md-right">Новый пароль</label>
 
                                 <div class="col-md-6">
 
-                                    <input id="password-confirm" type="password" class="form-control @error('newPassword') is-invalid @enderror" name="newPassword" value="12345678" required autocomplete="new-password">
+                                    <input id="passwordNew" type="password" class="form-control @error('newPassword') is-invalid @enderror" name="newPassword" value="" required autocomplete="newPassword">
 
                                     @error('newPassword')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Подтвердите пароль</label>
+
+                                <div class="col-md-6">
+
+                                    <input id="password-confirm" type="password" class="form-control @error('newPassword_confirmation') is-invalid @enderror" name="newPassword_confirmation" value="" required autocomplete="newPassword_confirmation">
+
+                                    @error('newPassword_confirmation')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

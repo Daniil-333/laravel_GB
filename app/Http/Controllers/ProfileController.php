@@ -41,7 +41,7 @@ class ProfileController extends Controller
             'name' => 'required|string|max:15',
             'email' => 'required|email|unique:users,email,' . Auth::id(),
             'password' => 'required',
-            'newPassword' => 'required|string|min:3'
+            'newPassword' => 'required|string|min:3|confirmed'
         ];
     }
 

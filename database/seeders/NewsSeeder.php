@@ -19,6 +19,7 @@ class NewsSeeder extends Seeder
         DB::table('news')->insert($this->getData());
     }
 
+
     private function getData() {
         $data = [];
         $faker = Faker\Factory::create('ru_RU');
@@ -27,7 +28,7 @@ class NewsSeeder extends Seeder
 
                 'title' => $faker->realText(10),
                 'description' => $faker->realText(rand(200,700)),
-                'isPrivate' => false,
+                'isPrivate' => random_int(0, 1),
                 'image' => null,
                 'category_id' => 1
             ];
@@ -37,7 +38,7 @@ class NewsSeeder extends Seeder
 
                 'title' => $faker->realText(10),
                 'description' => $faker->realText(rand(200,700)),
-                'isPrivate' => false,
+                'isPrivate' => random_int(0, 1),
                 'image' => null,
                 'category_id' => 2
             ];
@@ -47,7 +48,7 @@ class NewsSeeder extends Seeder
 
                 'title' => $faker->realText(10),
                 'description' => $faker->realText(rand(200,700)),
-                'isPrivate' => false,
+                'isPrivate' => random_int(0, 1),
                 'image' => null,
                 'category_id' => 3
             ];

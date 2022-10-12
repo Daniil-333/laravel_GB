@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Repositories\UserRepository;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -36,5 +41,26 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+
+    public function loginVK()
+    {
+        if(Auth::check()) {
+            return redirect()->route('home');
+        }
+        return Socialite::driver('vkontakte')->redirect();
+    }
+
+    public function reponseVK(UserRepository $userRepository)
+    {
+        if(!Auth::check()) {
+            $user = Socialite::driver('vkontakte')->user();
+
+            $userValid = $userRepository->getUserBySocID($user, 'vk');
+            Auth::login($userValid);
+        }
+
+        return redirect()->route('home');
     }
 }

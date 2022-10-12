@@ -33,13 +33,27 @@ class CategoryController extends Controller
 /*        $category = $category->getCategoryBySlug($slug);
         $news = $news->getNewsCategoryById($category['id'] ?? null);*/
 
-        $category = Category::query()->where('slug', $slug)->first();
-        $news = News::query()->where('category_id', $category->id)->paginate(5);
+        if(!News::all()->isEmpty()) {
 
-        return view('news.category', [
-            'category' => $category->title,
+            $category = Category::query()
+                ->where('slug', $slug)
+                ->first();
+
+            $news = News::query()
+                ->where('category_id', $category->id)
+                ->orderBy('created_at', 'DESC')
+                ->paginate(5);
+
+            return view('news.category', [
+                'category' => $category->title,
 //            'news' => $category->news,
-            'news' => $news
-        ]);
+                'news' => $news
+            ]);
+
+        }
+
+        return redirect()->route('news.index');
+
+
     }
 }

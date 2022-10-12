@@ -20,7 +20,7 @@
             <div class="col-md-8">
 
                 @if(!is_null($item))
-                    @if(!$item['isPrivate'])
+                    @if(!$item['isPrivate'] || Auth::id())
                         <div class="card">
                             <div class="card-header">
                                 <h1>{{ $item['title'] }}</h1>
@@ -29,7 +29,10 @@
                                 <img src="{{ $item['image'] ?? asset('storage/img/default.jpg') }}" alt="">
                             </div>
                             <div class="card-body">
-                                {{ $item['description'] }}
+                                <div>
+                                    {{ $item['description'] }}
+                                </div>
+                                <p class="mb-0 fst-italic text-end">{{ $item['created_at'] }}</p>
                             </div>
                         </div>
                     @else

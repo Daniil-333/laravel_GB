@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call(CategorySeeder::class);
+/*        $this->call(CategorySeeder::class);
 //        $this->call(NewsSeeder::class);
         \App\Models\News::factory()->count(10)->create();
         \App\Models\News::factory()->count(8)->create([
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\News::factory()->count(6)->create([
             'category_id' => 3
-        ]);
+        ]);*/
         $this->call(AdminSeeder::class);
     }
 }

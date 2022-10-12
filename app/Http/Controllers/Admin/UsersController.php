@@ -15,7 +15,7 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = User::query()->whereNot('name', '=', 'Admin')->paginate(6);
+        $users = User::query()->where('id', '!=', Auth::id())->paginate(6);
 
         return view('admin.users.index', [
             'users' => $users
@@ -39,7 +39,7 @@ class UsersController extends Controller
 
             $request->validated();
 
-            if ($request->post('password') === $request->post('password_repeat')) {
+//            if ($request->post('password') === $request->post('password_confirmation')) {
                 $user->fill([
                     'name' => $request->post('name'),
                     'email' => $request->post('email'),
@@ -49,11 +49,11 @@ class UsersController extends Controller
                     'is_admin' => (bool)$request->post('isAdmin')
                 ])->save();
                 return redirect()->route('admin.users.index')->withSuccess('Пользователь добавлен!');
-            } else {
-                $errors['password_repeat'][] = 'Пароли должны совпадать';
-                $request->flash();
-                return redirect()->route('admin.users.create')->withErrors($errors);
-            }
+//            } else {
+//                $errors['password_confirmation'][] = 'Пароли должны совпадать';
+//                $request->flash();
+//                return redirect()->route('admin.users.create')->withErrors($errors);
+//            }
         }
     }
 
@@ -102,7 +102,7 @@ class UsersController extends Controller
             'name' => 'required|min:5|max:20',
             'email' => 'required|email',
             'password' => "required|min:8|max:20",
-            'newPassword' => "required|min:8|max:20",
+            'newPassword' => "required|min:8|max:20|confirmed",
             'isAdmin' => 'sometimes|in:on',
         ];
     }
