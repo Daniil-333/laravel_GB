@@ -36,7 +36,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name.required' => 'Ты забыл заполнить :attribute',
-            'name.min' => 'Мало буков в поле :attribute',
+            'name.min' => 'Мало символов в поле :attribute',
             'email.required' => 'Ты забыл заполнить :attribute',
             'email.email' => 'Поле :attribute не валидно',
             'password.required' => 'Ты забыл заполнить :attribute',

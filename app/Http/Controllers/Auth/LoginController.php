@@ -44,21 +44,37 @@ class LoginController extends Controller
     }
 
 
-    public function loginVK()
+    public function loginSoc($soc)
     {
         if(Auth::check()) {
             return redirect()->route('home');
         }
-        return Socialite::driver('vkontakte')->redirect();
+        switch ($soc) {
+            case 'vk':
+                return Socialite::driver('vkontakte')->redirect();
+            case 'github':
+                return Socialite::driver('github')->redirect();
+        }
     }
 
-    public function reponseVK(UserRepository $userRepository)
+    public function reponseSoc(UserRepository $userRepository, $soc)
     {
         if(!Auth::check()) {
-            $user = Socialite::driver('vkontakte')->user();
+            $user = '';
+            switch ($soc) {
+                case 'vk':
+                    $user = Socialite::driver('vkontakte')->user();break;
+                case 'github':
+                    $user = Socialite::driver('github')->user();break;
+            }
 
-            $userValid = $userRepository->getUserBySocID($user, 'vk');
-            Auth::login($userValid);
+            try {
+                $userValid = $userRepository->getUserBySocID($user, $soc);
+                Auth::login($userValid);
+            }catch (\Exception $e) {
+                return redirect()->route('login')->withErrors( 'Пользователь с таким e-mail уже существует!');
+            }
+
         }
 
         return redirect()->route('home');

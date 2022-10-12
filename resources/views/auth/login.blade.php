@@ -15,6 +15,12 @@
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
+                @if ($errors->any())
+                    <div class="alert alert-danger" role="alert">
+                        {{ $errors->first() }}<br>
+                    </div>
+                @endif
+
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -56,8 +62,9 @@
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
-                                <div class="mt-3">
-                                    <a href="{{ route('vkLogin') }}"><img src="vk.png" alt="" width="40"></a>
+                                <div class="d-flex mt-3">
+                                    <a href="{{ route('loginSoc', 'vk') }}"><img src="vk.png" alt="" width="40"></a>
+                                    <a href="{{ route('loginSoc', 'github') }}"><img src="ghub.png" alt="" width="40"></a>
                                 </div>
                             </div>
                         </div>

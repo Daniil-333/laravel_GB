@@ -35,7 +35,7 @@ class ParserController extends Controller
                     continue;
                 }
 
-                if(is_null($news['title']) || is_null($news['description'])) {
+                if(is_null($news['title']) || is_null($news['description']) || is_null($news['category'])) {
                     continue;
                 }
 

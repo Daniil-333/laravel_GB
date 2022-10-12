@@ -4,11 +4,11 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use SocialiteProviders\Manager\OAuth2\User as UserOAuth2;
+//use SocialiteProviders\Manager\OAuth2\User as UserOAuth2;
 
 class UserRepository
 {
-    public function getUserBySocID(UserOAuth2 $user, string $socName)
+    public function getUserBySocID( $user, string $socName)
     {
         $userValid = User::query()
             ->where('id_in_soc', $user->id)

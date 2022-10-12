@@ -72,8 +72,8 @@ Route::fallback(function () {
     return view('404');
 });
 
-Route::get('/auth/vk', [LoginController::class, 'loginVK'])->name('vkLogin');
-Route::get('/auth/vk/response', [LoginController::class, 'reponseVK'])->name('vkResponse');
+Route::get('/auth/{soc}', [LoginController::class, 'loginSoc'])->name('loginSoc');
+Route::get('/auth/{soc}/response', [LoginController::class, 'reponseSoc'])->name('responseSoc');
 
 Auth::routes();
 /*Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');

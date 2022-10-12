@@ -33,28 +33,21 @@ class UsersController extends Controller
 
     public function store(UserRequest $request, User $user)
     {
-        $errors = [];
 
         if ($request->isMethod('post')) {
 
             $request->validated();
 
-//            if ($request->post('password') === $request->post('password_confirmation')) {
-                $user->fill([
-                    'name' => $request->post('name'),
-                    'email' => $request->post('email'),
+            $user->fill([
+                'name' => $request->post('name'),
+                'email' => $request->post('email'),
 //                    'email_verified_at' => now(),
-                    'password' => Hash::make($request->post('password')),
+                'password' => Hash::make($request->post('password')),
 //                    'remember_token' => Str::random(10),
-                    'is_admin' => (bool)$request->post('isAdmin')
-                ])->save();
-                return redirect()->route('admin.users.index')->withSuccess('Пользователь добавлен!');
-//            } else {
-//                $errors['password_confirmation'][] = 'Пароли должны совпадать';
-//                $request->flash();
-//                return redirect()->route('admin.users.create')->withErrors($errors);
-//            }
+                'is_admin' => (bool)$request->post('isAdmin')
+            ])->save();
         }
+        return redirect()->route('admin.users.index')->withSuccess('Пользователь добавлен!');
     }
 
 
