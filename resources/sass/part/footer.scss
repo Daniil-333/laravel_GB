@@ -1,0 +1,16 @@
+.footer {
+    background: #ececec;
+    box-shadow: 0 -.125em .25em rgba(10, 10, 10, .2);
+
+    &__content {
+        padding: 1rem 0;
+    }
+
+    &__rights {
+        margin: 0;
+    }
+
+    &__year {
+        margin: 0;
+    }
+}
