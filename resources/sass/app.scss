@@ -1,0 +1,40 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+@import "common/reset";
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+@import "part/header";
+@import "part/footer";
+
+.main {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+}
+
+.newsList {
+
+    &__item {
+        border-bottom: 1px solid #ececec;
+    }
+}
+
+.page404 {
+
+    &__link {
+        display: inline-block;
+        animation: pulsation 1s linear infinite alternate;
+
+        @keyframes pulsation {
+            100% {
+                transform: scale(1.05);
+            }
+        }
+    }
+}
