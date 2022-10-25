@@ -9,6 +9,7 @@
     <ul class="dropdown-menu" aria-labelledby="crudDropdown">
         <li><a class="dropdown-item" href="{{ route('admin.category.index') }}">Категории</a></li>
         <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">{{ __('Пользователи') }}</a></li>
+        <li><a class="dropdown-item" href="{{ route('admin.resource.index') }}">{{ __('Ресурсы') }}</a></li>
     </ul>
 </li>
 <li class="nav-item">

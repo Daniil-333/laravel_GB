@@ -186,6 +186,8 @@ return [
          * Package Service Providers...
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
+//        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
+//        Intervention\Image\ImageServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -211,6 +213,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-    ])->toArray(),
+//        'Image' => Intervention\Image\Facades\Image::class
 
+    ])->toArray(),
 ];

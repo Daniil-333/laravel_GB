@@ -42,30 +42,36 @@ class NewsController extends Controller
             $url = Storage::url($path);
         }
 
+        $news->fill($request->all());
         $news->image = $url ?? null;
-        $news->fill($request->all())->save();
 
-        return redirect()->route('news.show', $news->id);
+        $news->save();
+
+        return redirect()->route('news.show', $news->id)->with('success', 'Новость добавлена');
     }
 
-    public function update(NewsRequest $request, News $news) {
-
+    public function update(NewsRequest $request, News $news)
+    {
         $request->validated();
+        $isPrivate = array_key_exists('isPrivate', $request->all());
 
         if ($request->file('image')) {
             $path = Storage::putFile('public/img', $request->file('image'));
             $url = Storage::url($path);
         }
 
+        $news->fill($request->all());
         $news->image = $url ?? null;
-        $news->fill($request->all())->save();
+        $news->isPrivate = $isPrivate;
+
+        $news->save();
 
         return redirect()->route('news.show', $news->id);
     }
 
     public function destroy(News $news) {
         $news->delete();
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.index')->with('success', 'Новость удалена');
     }
 
     public function edit(News $news) {

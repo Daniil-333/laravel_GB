@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\ResourceController as AdminResourceController;
 use App\Http\Controllers\Admin\ParserController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\ProfileController;
@@ -34,7 +35,13 @@ Route::get('/auth', [AuthController::class, 'index'])->name('auth');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
-Route::match(['get', 'post'],'/profile', [ProfileController::class, 'update'])->name('updateProfile');
+Route::match(['get', 'post'],'/profile', [ProfileController::class, 'update'])
+    ->middleware('auth')
+    ->name('updateProfile');
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'is_admin']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 Route::name('news.')
     ->prefix('news')
@@ -51,12 +58,8 @@ Route::name('admin.')
     ->group(function () {
         Route::get('/', [AdminNewsController::class, 'index'])->name('index');
         Route::resource('/news', AdminNewsController::class)->except('show');
-       /* Route::get('/news/create', [AdminNewsController::class, 'create'])->name('news.create');
-        Route::get('/news/{news}/edit', [AdminNewsController::class, 'edit'])->name('news.edit');
-        Route::post('/news', [AdminNewsController::class, 'store'])->name('news.store');
-        Route::put('/news/{news}', [AdminNewsController::class, 'update'])->name('news.update');
-        Route::delete('/news/{news}', [AdminNewsController::class, 'destroy'])->name('news.destroy');*/
         Route::resource('/category', AdminCategoryController::class)->except('show');
+        Route::resource('/resource', AdminResourceController::class)->except('show');
 
         Route::get('/parser', [ParserController::class, 'index'])->name('parser');
 

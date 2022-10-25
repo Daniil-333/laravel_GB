@@ -30,7 +30,7 @@
                             </div>
                             <div class="card-body">
                                 <div>
-                                    {{ $item['description'] }}
+                                    {!! $item['description'] !!}
                                 </div>
                                 <p class="mb-0 fst-italic text-end">{{ $item['created_at'] }}</p>
                             </div>

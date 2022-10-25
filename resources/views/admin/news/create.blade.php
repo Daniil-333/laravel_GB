@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="form-group col-md-8 mb-4">
-                        <label for="desc" class="mb-2">{{ __('Описание') }}</label>
+                        <label for="descNews" class="mb-2">{{ __('Описание') }}</label>
 
                         @if ($errors->has('description'))
                             <div class="alert alert-danger" role="alert">
@@ -71,8 +71,22 @@
                         @endif
 
                         <div class="">
-                            <textarea id="desc" class="form-control" name="description">{{ old('description') ?? $news->description }}</textarea>
+                            <textarea id="descNews" class="form-control" name="description">{!! old('description') ?? $news->description !!} </textarea>
+
+{{--                            <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+                            <script>
+                                var options = {
+                                    filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+                                    filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+                                    filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+                                    filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+                                };
+                            </script>
+                            <script>
+                                CKEDITOR.replace('descNews', options);
+                            </script>--}}
                         </div>
+
                     </div>
 
                     <div class="form-group col-md-8 mb-4">
@@ -93,6 +107,15 @@
 
                     <div class="form-group col-md-8 mb-4">
                         <div class="form-check">
+
+                            @if ($errors->has('isPrivate'))
+                                <div class="alert alert-danger" role="alert">
+                                    @foreach ($errors->get('isPrivate') as $error)
+                                        {{ $error }}<br>
+                                    @endforeach
+                                </div>
+                            @endif
+
                             <input class="form-check-input" type="checkbox" name="isPrivate" id="isPrvate"
                                 @if ($news->isPrivate == 1 || old('isPrivate')) checked @endif>
 

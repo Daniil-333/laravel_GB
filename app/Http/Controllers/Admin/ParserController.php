@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\Resource;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -14,13 +15,10 @@ class ParserController extends Controller
 {
     public function index()
     {
-        $sources = [
-            'https://lenta.ru/rss',
-            'https://www.gazeta.ru/export/rss/first.xml'
-        ];
+        $sources = Resource::all();
 
         foreach ($sources as $source) {
-            $xml = XmlParser::load($source);
+            $xml = XmlParser::load($source->url);
             $data = $xml->parse([
                 'title' => ['uses' => 'channel.title'],
                 'link' => ['uses' => 'channel.link'],

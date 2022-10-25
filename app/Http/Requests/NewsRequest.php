@@ -24,12 +24,12 @@ class NewsRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:5|max:20',
+            'title' => 'required|min:5|max:100',
             'description' => 'required|min:5',
             'category_id' => "required|exists:App\Models\Category,id",
             'image' => 'mimes:jpeg,bmp,png|max:1000',
 //            'isPrivate' => 'boolean',
-            'isPrivate' => 'sometimes|in:1',
+            'isPrivate' => 'sometimes|in:on',
         ];
     }
 
@@ -37,9 +37,11 @@ class NewsRequest extends FormRequest
     {
         return [
             'title.required' => 'Ты забыл заполнить :attribute',
-            'title.min' => 'Мало буков в поле :attribute',
+            'title.min' => 'Мало символов в поле :attribute',
             'description.required' => 'Ты забыл заполнить :attribute',
-            'description.min' => 'Мало буков в поле :attribute',
+            'description.min' => 'Мало символов в поле :attribute',
+            'image.mimes' => 'Неверный формат изображения',
+            'image.max' => 'Изображение должно быть не более 1Mb',
         ];
     }
 
@@ -50,6 +52,7 @@ class NewsRequest extends FormRequest
             'description' => 'Описание новости',
             'category_id' => 'Категория новости',
             'image' => 'Изображение',
+            'isPrivate' => '"Чекбокс Приватности"'
         ];
     }
 }
